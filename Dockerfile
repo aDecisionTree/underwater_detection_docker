@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y wget zip g++ &&\
  pip install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ scipy==1.0 && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ torch torchvision &&\
-# WORKDIR ./lib
-RUN cd /lib && python setup.py build develop
-# WORKDIR /
-RUN wget -P /vgg16/pascal_voc/ https://gaopursuit.oss-cn-beijing.aliyuncs.com/202004/faster_rcnn_1_20_1991.pth
+ cd /lib && \
+ python setup.py build develop && \
+ wget -P /vgg16/pascal_voc/ https://gaopursuit.oss-cn-beijing.aliyuncs.com/202004/faster_rcnn_1_20_1991.pth
 COPY run.sh /
