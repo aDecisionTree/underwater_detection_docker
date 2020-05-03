@@ -7,7 +7,7 @@ echo "deb-src http://mirrors.aliyun.com/debian/ buster main contrib non-free" >>
 echo "deb-src http://mirrors.aliyun.com/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list&&\
 echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main contrib non-free" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y wget zip g++ libsm6 libxrender1 libglib2.0-dev libxext-dev&&\
- wget https://gaopursuit.oss-cn-beijing.aliyuncs.com/202004/underwater_detect_new.zip && \
+ wget https://github.com/aDecisionTree/CVPR2020UG2code/releases/download/v1/underwater_detect_new.zip && \
  unzip underwater_detect_new.zip && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ -r requirements.txt && \
