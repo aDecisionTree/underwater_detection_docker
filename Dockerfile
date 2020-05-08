@@ -1,25 +1,17 @@
-FROM python:3.6.9-slim
+FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu18.04
 CMD /bin/bash
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        cuda-nvml-dev-$CUDA_PKG_VERSION \
-        cuda-command-line-tools-$CUDA_PKG_VERSION \
-cuda-libraries-dev-$CUDA_PKG_VERSION \
-        cuda-minimal-build-$CUDA_PKG_VERSION \
-        libnccl-dev=$NCCL_VERSION-1+cuda10.2 \
-libcublas-dev=10.2.2.89-1 \
-&& \
-    rm -rf /var/lib/apt/lists/*
-
-ENV LIBRARY_PATH /usr/local/cuda/lib64/stubs
-
-RUN echo "deb http://mirrors.aliyun.com/debian/ buster main contrib non-free" >/etc/apt/sources.list&&\
-echo "deb http://mirrors.aliyun.com/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list&&\
-echo "deb http://mirrors.aliyun.com/debian/ buster-backports main contrib non-free" >> /etc/apt/sources.list&&\
-echo "deb-src http://mirrors.aliyun.com/debian/ buster main contrib non-free" >>/etc/apt/sources.list&&\
-echo "deb-src http://mirrors.aliyun.com/debian/ buster-updates main contrib non-free" >> /etc/apt/sources.list&&\
-echo "deb-src http://mirrors.aliyun.com/debian/ buster-backports main contrib non-free" >> /etc/apt/sources.list
-RUN apt-get update && apt-get install -y wget zip g++ libsm6 libxrender1 libglib2.0-dev libxext-dev&&\
+RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse" >/etc/apt/sources.list&&\
+echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-security main restricted universe multiverse" >>/etc/apt/sources.list&&\
+echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-updates main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse" >>/etc/apt/sources.list&&\
+echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list&&\
+echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list
+RUN apt-get update && apt-get install -y wget zip g++ libsm6 libxrender1 libglib2.0-dev libxext-dev python3.6 python3.6-dev&&\
+ alias python=python3.6
  wget https://github.com/aDecisionTree/CVPR2020UG2code/releases/download/v1/underwater_detect_new.zip && \
  unzip underwater_detect_new.zip && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip && \
