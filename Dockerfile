@@ -10,8 +10,9 @@ echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted univ
 echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse" >>/etc/apt/sources.list&&\
 echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list&&\
 echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list
-RUN apt-get update && apt-get install -y wget zip g++ libsm6 libxrender1 libglib2.0-dev libxext-dev python3.6 python3.6-dev&&\
- alias python=python3.6&&\ 
+RUN apt-get update && apt-get install -y wget zip g++ libsm6 libxrender1 libglib2.0-dev libxext-dev python3.6 python3.6-dev python3-pip&&\
+ alias python="python3.6" && \
+ alias pip="pip3" && \
  wget https://github.com/aDecisionTree/CVPR2020UG2code/releases/download/v1/underwater_detect_new.zip && \
  unzip underwater_detect_new.zip && \
  pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip && \
